@@ -1,11 +1,12 @@
 const conn= require('./conn');
 const {Sequelize}=conn;
 
-const Products= conn.define('product',{
-  name:Sequelize.STRING,
-  isSpecial: Sequelize.STRING
+const Product= conn.define('product',{
+  name: Sequelize.STRING,
+  isSpecial: Sequelize.BOOLEAN
 
 })
 
 
-module.exports=products;
+module.exports=Product;
+

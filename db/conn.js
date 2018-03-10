@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 
-conn= new Sequelize.define(process.env.DATABASE_URL);
+const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/products_react_db' ,{
+  logging:false
+});
 
 
 module.exports=conn;
