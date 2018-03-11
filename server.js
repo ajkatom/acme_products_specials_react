@@ -4,7 +4,7 @@ const path=require('path');
 const db = require('./db');
 const {Product}=db.model
 const port= process.env.PORT || 3000;
-
+app.use(require('body-parser').json());
 app.use(express.static(path.join(__dirname,'/dist')));
 
 app.get('/',(req,res,next)=>{
@@ -16,6 +16,16 @@ app.get('/api/products',(req,res,next)=>{
     .then((products)=>{
       res.send(products)
     })
+    .catch(next)
+})
+app.put('/api/products/:id',(req,res,next)=>{
+    Product.findById(req.params.id)
+    .then((product)=>{
+      console.log(req.body.isSpecial)
+      product.isSpecial=req.body.isSpecial;
+      return product.save();
+    })
+
     .catch(next)
 })
 

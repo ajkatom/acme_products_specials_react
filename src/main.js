@@ -7,10 +7,16 @@ export default class  Main extends React.Component{
   constructor(){
     super()
     this.state={
-      Products:[]
+      Products:[],
     }
+    this.updateStatus=this.updateStatus.bind(this)
   }
+  updateStatus(product){
+    axios.put(`/api/products/${product.id}`,product)
+      .then(res=>res.data)
+      .catch(console.error)
 
+  }
   componentDidMount(){
   axios.get('/api/products')
     .then(res=>res.data)
@@ -20,12 +26,12 @@ export default class  Main extends React.Component{
   
 
 render(){
-  const {products} = this.state;
+  const { products} = this.state;
+  const {updateStatus}=this;
   return (
     <Router>
       <div>
-  <Route path='/' exact component={() => <Products products={products} />}/>  
-  {/* <Route path='/api/products' exact render={() => <Products products={products} />}/>   */}
+        <Route path='/' exact component={() => <Products products={products} Toupdate={updateStatus}/>}/>   
       </div>
     </Router>
   );
