@@ -21,7 +21,6 @@ app.get('/api/products',(req,res,next)=>{
 app.put('/api/products/:id',(req,res,next)=>{
     Product.findById(req.params.id)
     .then((product)=>{
-      console.log(req.body.isSpecial)
       product.isSpecial=req.body.isSpecial;
       return product.save();
     })

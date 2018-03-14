@@ -7,11 +7,21 @@ export default class  Main extends React.Component{
   constructor(){
     super()
     this.state={
-      Products:[],
+      products:[],
     }
     this.updateStatus=this.updateStatus.bind(this)
   }
+ 
   updateStatus(product){
+    const id=product.id;
+    const { products }=this.state
+    products.find(product => {
+      if (product.id === id * 1) {
+        product.isSpecial = !product.isSpecial
+        this.props.Toupdate(product)
+        this.setState({ product })
+      }
+    })
     axios.put(`/api/products/${product.id}`,product)
       .then(res=>res.data)
       .catch(console.error)
